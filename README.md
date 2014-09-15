@@ -1,4 +1,3 @@
-xspider
-=======
-
-拘于bomb框架开发的一个简单采集系统
+xSpider项目说明
+====
+xSpider是基于Bomb框架开发的采集系统

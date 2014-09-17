@@ -1,14 +1,13 @@
 <?php if ( !defined('BOMB') ) exit('No direct script access allowed');
 
-require APP . 'controls/BaseControl.php';
-require APP . 'models/TaskModel.php';
+require APP . 'controls/xspider/_XspiderControl.php';
 
 
 /**
  * Ecshop采集专用接口
  */
 
-class EcshopControl extends _BaseControl
+class EcshopControl extends _XspiderControl
 {
     public function __construct() {
         parent::__construct();
@@ -16,7 +15,62 @@ class EcshopControl extends _BaseControl
 
     public function index() {
         echo 'Ecshop采集专用接口';
-        $str = $this->_getTaskList();print_r($str);print_r($GLOBALS['run_sql']);
+        $str = $this->_getTaskList();//print_r($str);print_r($GLOBALS['run_sql']);
+
+        /* phpQuery Demo  */
+        // phpQuery::newDocumentFile('http://www.tomdurrie.com/ding-g63517.html');
+        // $test =  pq(".activity")->html();
+        // echo trim($test);
+
+        /* xml 获取 */
+        // phpQuery::newDocumentFile('http://www.helloweba.com/feed');
+        // $title_list = pq('item>title');print_r($title_list);exit;
+        // foreach($title_list as $li){
+        //     echo pq($li)->html();
+        //     echo '<br/>';
+        // }
+        // 
+        
+
+        /**
+         * 获取维美达链接列表
+         */
+        // phpQuery::newDocumentFile('http://www.tomdurrie.com/search.php?page=1');
+        // $goods_list = pq('.hoverlist');
+        // foreach($goods_list as $li){
+        //     $goods[] = array(
+        //             'url' => pq($li)->find('a')->attr('href'),
+        //             'image' => 'http://www.tomdurrie.com/'.pq($li)->find('img')->attr('src'),
+        //         );
+        // }
+        // print_r($goods);
+
+        /**
+         * 获取单个产品内容
+         */
+        phpQuery::newDocumentFile('http://www.tomdurrie.com/ding-g63256.html');
+        $goods_gallerys = pq('.gallery>#demo>#demo1>ul>li');
+        foreach($goods_gallerys as $li){
+            $goods_images[] = array(
+                'org_img' => 'http://www.tomdurrie.com/'.pq($li)->find('a')->attr('rev'),
+                'thumb_img' => 'http://www.tomdurrie.com/'.pq($li)->find('img')->attr('src'),
+            );
+        }
+        // 说明源id大于47900是无水印的 http://www.tomdurrie.com/search.php?page=380 前判读吧..
+        $goods_info = array(
+            'title' => pq('h1')->html(),
+            'cat_name' => pq('#ur_here>.f_l>a:eq(1)')->html(),
+            'org_id' => pq('input[name="id"]')->attr('value'),
+            'sn' => pq('.props>dl:eq(0)>dd')->html(),
+            'brand' => pq('.props>dl:eq(1)>dd')->html(),
+            'price' => pq('#ECS_SHOPPRICE')->html(),
+            'detail' => '<table>' . pq('div>table')->html() . '</table>',
+            'images' => $goods_images,
+        );
+        
+        print_r($goods_info); 
+
+
     }
 
     /**
@@ -39,8 +93,6 @@ class EcshopControl extends _BaseControl
                 }
             }
         }
-
-        
 
         return false;
     }

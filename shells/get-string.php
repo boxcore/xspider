@@ -7,8 +7,8 @@ set_time_limit( 0 );
 define('APP',  dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR);
 
 // 载入框架引导文件
-require APP.'system/_shell.php';
-
+require APP . 'system/_shell.php';
+require APP . 'funcs/spider.fn.php';
 require APP . 'models/ContentModel.php';
 
 system('echo -e "\033[32m开始获取队列... \033[0m"');

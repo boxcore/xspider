@@ -14,10 +14,13 @@
 */
 
 return array(
-
-    'default'      => array('c'=>'Index'),
-    'api/get_article'       => array('c'=>'Api', 'f'=>'getArticle'),
-    'ecshop' => array('c'=>'Ecshop', 'f'=>'index'),
-    'ecshop/get' => array('c'=>'Ecshop', 'f'=>'get'),
-    '404.html'     => array('c'=>'Notfind'),
+    
+    'default'         => array('c'=>'Index'),
+    'api/get_article' => array('c'=>'Api', 'f'=>'getArticle'),
+    
+    /* 采集 */
+    'ecshop'          => array('c'=>'xspider/Ecshop', 'f'=>'index'),
+    'ecshop/get'      => array('c'=>'xspider/Ecshop', 'f'=>'get'),
+    
+    '404.html'        => array('c'=>'Notfind'),
 );

@@ -5,9 +5,9 @@ class ContentModel {
 
     }
 
-    public function getUrlList($configs,$limit='LIMIT 20 '){
+    public function getUrlList($configs,$limit='LIMIT 20 ', $table_name = 'task_url'){
         $where = $this->__getWhere($configs);
-        $sql = 'SELECT * FROM task_url '.$where.
+        $sql = 'SELECT * FROM '.$table_name.' '.$where.
                 'ORDER BY id '.$limit;
         $data = get_data($sql);
         return $data;

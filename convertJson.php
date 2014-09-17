@@ -53,14 +53,14 @@ $str_json = '';
 $arr_get_links = array(
     'node_info' => array(
         'charset' => 'utf-8',
-        'node_name' => '糗事百科',
+        'node_name' => '维美达皮具',
         'max_link' => '-1',
         'exptime' => '60'
     ),
     'list_rule' => array(
         'list_type' => 'batch_link', // 指定获取链接的类型: mixed, batch_link,text_link,rss_link
         'batch_link' => array(
-            'regexurl' => 'http://www.qiushibaike.com/8hr/page/(*)',
+            'regexurl' => 'http://www.tomdurrie.com/search.php?page=(*)',
             "start_id"=>"1", //开始id
             "end_id"=>"10", // 结束id
             "id_len"=>"1", // 数字定长
@@ -111,7 +111,7 @@ $arr_get_content = array(
     ),
 );
 
-$json = json_encode($arr_get_content,true);
+$json = json_encode($arr_get_links,true);
 
 echo "\n\n\n";
 print_r( json_decode($json) );

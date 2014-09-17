@@ -1,19 +1,48 @@
 <?php if ( !defined('BOMB') ) exit('No direct script access allowed');
 
 require APP . 'controls/BaseControl.php';
+require APP . 'models/TaskModel.php';
+
 
 /**
- * 
+ * Ecshop采集专用接口
  */
 
-class ApiControl extends _BaseControl
+class EcshopControl extends _BaseControl
 {
     public function __construct() {
         parent::__construct();
     }
 
     public function index() {
-        echo 'i am api';
+        echo 'Ecshop采集专用接口';
+        $str = $this->_getTaskList();print_r($str);print_r($GLOBALS['run_sql']);
+    }
+
+    /**
+     * 获取单个任务列表
+     *
+     * @author boxcore
+     * @date   2014-09-17
+     * @return array     [description]
+     */
+    protected function _getTaskList( ){
+        $mark = 'qsbk';
+        $task_list = array();
+        if( !empty($mark) ) {
+            $taskModel = new TaskModel();
+            $task_id = $taskModel->getIdByMark($mark);
+            if($task_id>0){
+                $task_list = $taskModel->getList(array('task_id'=>$task_id));
+                if(!empty($task_list)){
+                    return $task_list[0];
+                }
+            }
+        }
+
+        
+
+        return false;
     }
 
     public function getArticle() {

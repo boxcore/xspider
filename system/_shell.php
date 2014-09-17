@@ -20,7 +20,7 @@ date_default_timezone_set('Asia/Chongqing');
 define( 'DS', DIRECTORY_SEPARATOR );
 
 // 项目根目录路径
-define( 'BOXCORE', dirname(__FILE__) . DS);
+define( 'BOMB', dirname(__FILE__) . DS);
 
 // 设置当前请求语言，默认设置为简体中文
 $GLOBALS['request']['lang'] = 'zh_cn';
@@ -34,13 +34,13 @@ $GLOBALS['db']      = isset($_CONFIGS['db']) ? $_CONFIGS['db'] : array();
 define( 'ENV', $GLOBALS['app']['environment']);
 
 // 载入日志类
-require BOXCORE . 'core'.DS.'Logger.lib.php';
+require BOMB . 'core'.DS.'Logger.lib.php';
 
 // 载入框架核心函数库
-require BOXCORE . 'core'.DS.'core.fn.php';
+require BOMB . 'core'.DS.'core.fn.php';
 
 // 载入框架数据库操作函数
-require BOXCORE . 'core'.DS.'db.fn.php';
+require BOMB . 'core'.DS.'db.fn.php';
 
 // 载入程序全局函数（程序公用函数库）
 require APP . 'funcs'.DS.'app.fn.php';

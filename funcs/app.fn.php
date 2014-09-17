@@ -1,4 +1,4 @@
-<?php if ( !defined('BOXCORE') ) exit('No direct script access allowed');
+<?php if ( !defined('BOMB') ) exit('No direct script access allowed');
 
 if( !function_exists('src_url') ) {
     function src_url($uri=''){

@@ -1,4 +1,4 @@
-<?php if ( !defined('BOXCORE') ) exit('No direct script access allowed');
+<?php if ( !defined('BOMB') ) exit('No direct script access allowed');
 
 /*
   ----------------------------------------------------------------------
@@ -17,5 +17,7 @@ return array(
 
     'default'      => array('c'=>'Index'),
     'api/get_article'       => array('c'=>'Api', 'f'=>'getArticle'),
+    'ecshop' => array('c'=>'Ecshop', 'f'=>'index'),
+    'ecshop/get' => array('c'=>'Ecshop', 'f'=>'get'),
     '404.html'     => array('c'=>'Notfind'),
 );

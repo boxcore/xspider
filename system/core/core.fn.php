@@ -2,7 +2,7 @@
 
 /*
   ---------------------------------------------------------------
-    boxcore框架基础函数库
+    bomb框架基础函数库
     提供框架/开发所需的常用函数，包括错误处理，URL，日志记录，配置文件读写等函数.
     
     @version 0.1
@@ -41,7 +41,7 @@ function show_error( $severity, $message='', $filepath='', $line='' ) {
     Logger::error( $title . ' - ' . $message );
     
     if( ENV == 'development' ) {    
-        include BOXCORE.'core'.DS.'error.php';
+        include BOMB.'core'.DS.'error.php';
     }
     else {
         include APP.'errors'.DS.'error.php';
@@ -82,7 +82,7 @@ function transcribe() {
 function show_404() {
     header('HTTP/1.1 404 Not Found');
     Logger::error( '404 Not Found - ' . $GLOBALS['request']['url'] );
-    if( conf('boxcore','system','environment') == 'development' ) {
+    if( conf('bomb','system','environment') == 'development' ) {
         show_error( E_ERROR, '404 Not Found - ' . $GLOBALS['request']['url'] );
     }
     else {

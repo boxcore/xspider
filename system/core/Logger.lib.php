@@ -1,4 +1,4 @@
-<?php if ( !defined('BOXCORE') ) exit('No direct script access allowed');
+<?php if ( !defined('BOMB') ) exit('No direct script access allowed');
 
 /**
  * 日志记录类
@@ -44,7 +44,7 @@ class Logger {
      * @param string $msg 消息
      */
     private static function __output( $level, $msg ) {
-        $output = isset( $GLOBALS['boxcore']['log_output'] ) ? $GLOBALS['boxcore']['log_output'] : 'none';
+        $output = isset( $GLOBALS['bomb']['log_output'] ) ? $GLOBALS['bomb']['log_output'] : 'none';
         
         // 组装日志信息
         $msg = date('Y-m-d H:i:s') . " [{$level}] {$msg}\r\n";

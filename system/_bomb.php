@@ -2,11 +2,11 @@
 
 /*
   ----------------------------------------------------------------------
-    boxcore框架引导程序
+    bomb框架引导程序
     加载应用程序配置、基础类库，实现整个框架流程
     
     @pack boxcore
-    @version 0.1 (presimmon)
+    @version 0.1 (bomb)
     @link http://framework.boxcore.org
     @author chunze.huang
   ----------------------------------------------------------------------
@@ -18,7 +18,7 @@ $GLOBALS['_beginTime'] = microtime(TRUE);
 define( 'DS', DIRECTORY_SEPARATOR );
 
 // 项目根目录路径
-define( 'BOXCORE', dirname(__FILE__).DS);
+define( 'BOMB', dirname(__FILE__).DS);
 
 
 // 设置当前请求语言，默认设置为简体中文
@@ -34,13 +34,13 @@ $GLOBALS['db'] = isset($_CONFIGS['db']) ? $_CONFIGS['db'] : array();
 define( 'ENV', $GLOBALS['app']['environment']);
 
 // 载入日志类
-require BOXCORE . 'core'.DS.'Logger.lib.php';
+require BOMB . 'core'.DS.'Logger.lib.php';
 
 // 载入框架核心函数库
-require BOXCORE . 'core'.DS.'core.fn.php';
+require BOMB . 'core'.DS.'core.fn.php';
 
 // 载入框架数据库操作函数
-require BOXCORE . 'core'.DS.'db.fn.php';
+require BOMB . 'core'.DS.'db.fn.php';
 
 // 载入程序全局函数（程序公用函数库）
 require APP . 'funcs'.DS.'app.fn.php';
@@ -80,10 +80,10 @@ require( $__cont_file );
 $__class_name = $GLOBALS['request']['class'];
 
 if( !class_exists( $__class_name ) ) trigger_error( "Can\'t find class: {$__class_name}", E_USER_ERROR );
-$__boxcore = new $__class_name();
+$__bomb = new $__class_name();
 
 $__method = $GLOBALS['request']['fn'];
-if( !method_exists( $__boxcore, $__method ) ) trigger_error( "Can\'t find method: {$__method}", E_USER_ERROR );
+if( !method_exists( $__bomb, $__method ) ) trigger_error( "Can\'t find method: {$__method}", E_USER_ERROR );
 
 $__params = isset($GLOBALS['request']['params']) ? $GLOBALS['request']['params'] : array();
 
@@ -91,7 +91,7 @@ $__params = isset($GLOBALS['request']['params']) ? $GLOBALS['request']['params']
 run_func_coll( 'pre_control' );
 
 // 执行action()方法
-call_user_func_array( array($__boxcore, $__method), $__params );
+call_user_func_array( array($__bomb, $__method), $__params );
 
 // 执行action 后置钩子
 run_func_coll( 'post_control' );

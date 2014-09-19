@@ -13,7 +13,7 @@ require APP . 'models/TaskModel.php';
 require APP . 'et/phpQuery/phpQuery.php';
 
 //获取链接列表  http://www.tomdurrie.com/search.php?page=380
-$links = get_batch_link('http://www.tomdurrie.com/search.php?page=(*)', 1, 3, 1);
+$links = get_batch_link('http://www.tomdurrie.com/search.php?page=(*)', 1, 380, 1);
 if(!empty($links)){
     foreach($links as $target_url){
         /**

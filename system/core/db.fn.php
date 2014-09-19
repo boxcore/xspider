@@ -70,7 +70,7 @@ function run_sql( $sql, $db = NULL ) {
     $GLOBALS['last_sql']      = $sql;
 
     if( mysql_error() ) {
-        trigger_error( 'MySQL error ' . mysql_errno() . mysql_error(), E_USER_ERROR );
+        trigger_error( 'MySQL error ' . mysql_errno() . mysql_error() ."\n[{$sql}]", E_USER_ERROR );
     }
     
     // 触发执行 SQL 钩子

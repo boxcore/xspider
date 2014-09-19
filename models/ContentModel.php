@@ -20,6 +20,10 @@ class ContentModel {
             $where .= prepare('AND need_push = ?s ', array($configs['need_push']));
         }
 
+        if(isset($configs['url'])){
+            $where .= prepare('AND url = ?s ', array($configs['url']));
+        }
+
         if(isset($configs['task_list_id'])){
             $where .= prepare('AND task_list_id = ?i ', array($configs['task_list_id']));
         }

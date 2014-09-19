@@ -18,10 +18,11 @@ $table_name = 'spider_ecshop_url';
 $contentModel = new ContentModel();
 
 $configs = array(
-    'need_push' => 'yes'
+    'need_push' => 'yes',
+    // 'url'=>'http://www.tomdurrie.com/ding-g63634.html',
 );
 
-$url_list = $contentModel->getUrlList($configs, 'LIMIT 50 ', $table_name);
+$url_list = $contentModel->getUrlList($configs, 'LIMIT 15000 ', $table_name);
 $url_count = count($url_list);
 
 echo "获取到{$url_count}条要采集的内容... \n";
@@ -49,7 +50,13 @@ if(!empty($url_list)){
 
                 $cat_name = trim( pq('#ur_here>.f_l>a:eq(1)')->html() );
                 $brand_name = trim( pq('.props>dl:eq(1)>dd')->html() );
-                $price = intval( pq('#ECS_SHOPPRICE')->html() );
+                $price_tmp = trim( pq('#ECS_SHOPPRICE')->html() );
+                if( preg_match('(\d+)', $price_tmp, $match) ) {
+                    $price = $match[0];
+                }else{
+                    $price =0;
+                }
+
 
                 $goods_info = array(
                     'goods_id'     => $goods_id,
@@ -59,10 +66,10 @@ if(!empty($url_list)){
                     'goods_desc'   => '<table>' . pq('div>table')->html() . '</table>',
                     'brand_id'     => get_brand_id( $brand_name ),
                     'goods_number' => 9999,
-                    'market_price' => $price/0.57,
+                    'market_price' => (int)(floor($price/0.57)),
                     'shop_price'   => $price,
-                    'goods_thumb'  => 'http://www.tomdurrie.com/'.$v['thumb_img_org'],
-                );
+                    'goods_thumb'  => 'http://baobaopic.qiniudn.com/'.$v['thumb_img_org'],
+                );print_r($goods_info);exit;
 
                 $result = insert('ecs_goods', $goods_info);
 
@@ -75,14 +82,17 @@ if(!empty($url_list)){
                 foreach($gallerys_tmp as $li){
                     $img_url = trim(pq($li)->find('a')->attr('rev'));
                     $thumb_url = trim(pq($li)->find('img')->attr('src'));
+
                     $goods_gallerys[] = array(
                         'goods_id'  => $goods_id,
-                        'img_url'   => !empty($img_url) ? 'http://www.tomdurrie.com/'.$img_url : '',
-                        'thumb_url' => !empty($thumb_url) ? 'http://www.tomdurrie.com/'.$thumb_url : '',
+                        'img_url'   => !empty($img_url) ? 'http://baobaopic.qiniudn.com/'.$img_url : '',
+                        'thumb_url' => !empty($thumb_url) ? 'http://baobaopic.qiniudn.com/'.$thumb_url : '',
                     );
                 }
 
-                $gallery_result = insert_batch('ecs_goods_gallery', $goods_gallerys);
+                if( isset($goods_gallerys[0]['img_url']) && !empty($goods_gallerys[0]['img_url']) ){
+                    $gallery_result = insert_batch('ecs_goods_gallery', $goods_gallerys);
+                }
 
                 if($result){
                     update($table_name, array('need_push'=>'no', 'goods_id'=>$goods_id), array('hash'=>$v['hash']));

@@ -88,6 +88,7 @@ if(!empty($url_list)){
                         'img_url'   => !empty($img_url) ? 'http://baobaopic.qiniudn.com/'.$img_url : '',
                         'thumb_url' => !empty($thumb_url) ? 'http://baobaopic.qiniudn.com/'.$thumb_url : '',
                     );
+                    
                 }
 
                 if( isset($goods_gallerys[0]['img_url']) && !empty($goods_gallerys[0]['img_url']) ){
@@ -96,7 +97,8 @@ if(!empty($url_list)){
 
                 if($result){
                     update($table_name, array('need_push'=>'no', 'goods_id'=>$goods_id), array('hash'=>$v['hash']));
-                    system("echo -e '成功保存内容链接: \\033[32m".$v['url']."\\033[0m'");
+                    system("echo -e '\\033[32m成功保存内容链接:\\033[0m \\033[34m".$v['url']."\\033[0m'");
+
                 }
             }
 

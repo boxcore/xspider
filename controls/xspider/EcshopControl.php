@@ -14,8 +14,8 @@ class EcshopControl extends _XspiderControl
     }
 
     public function index() {
-        echo 'Ecshop采集专用接口';
-        $str = $this->_getTaskList();//print_r($str);print_r($GLOBALS['run_sql']);
+        // echo 'Ecshop采集专用接口';
+        // $str = $this->_getTaskList();//print_r($str);print_r($GLOBALS['run_sql']);
 
         /* phpQuery Demo  */
         // phpQuery::newDocumentFile('http://www.tomdurrie.com/ding-g63517.html');
@@ -48,28 +48,53 @@ class EcshopControl extends _XspiderControl
         /**
          * 获取单个产品内容
          */
-        phpQuery::newDocumentFile('http://www.tomdurrie.com/ding-g63256.html');
-        $goods_gallerys = pq('.gallery>#demo>#demo1>ul>li');
-        foreach($goods_gallerys as $li){
-            $goods_images[] = array(
-                'org_img' => 'http://www.tomdurrie.com/'.pq($li)->find('a')->attr('rev'),
-                'thumb_img' => 'http://www.tomdurrie.com/'.pq($li)->find('img')->attr('src'),
-            );
-        }
-        // 说明源id大于47900是无水印的 http://www.tomdurrie.com/search.php?page=380 前判读吧..
-        $goods_info = array(
-            'title' => pq('h1')->html(),
-            'cat_name' => pq('#ur_here>.f_l>a:eq(1)')->html(),
-            'org_id' => pq('input[name="id"]')->attr('value'),
-            'sn' => pq('.props>dl:eq(0)>dd')->html(),
-            'brand' => pq('.props>dl:eq(1)>dd')->html(),
-            'price' => pq('#ECS_SHOPPRICE')->html(),
-            'detail' => '<table>' . pq('div>table')->html() . '</table>',
-            'images' => $goods_images,
-        );
+        // phpQuery::newDocumentFile('http://www.tomdurrie.com/ding-g63256.html');
+        // $goods_gallerys = pq('.gallery>#demo>#demo1>ul>li');
+        // foreach($goods_gallerys as $li){
+        //     $goods_images[] = array(
+        //         'org_img' => 'http://www.tomdurrie.com/'.pq($li)->find('a')->attr('rev'),
+        //         'thumb_img' => 'http://www.tomdurrie.com/'.pq($li)->find('img')->attr('src'),
+        //     );
+        // }
+        // // 说明源id大于47900是无水印的 http://www.tomdurrie.com/search.php?page=380 前判读吧..
+        // $goods_info = array(
+        //     'title' => pq('h1')->html(),
+        //     'cat_name' => pq('#ur_here>.f_l>a:eq(1)')->html(),
+        //     'org_id' => pq('input[name="id"]')->attr('value'),
+        //     'sn' => pq('.props>dl:eq(0)>dd')->html(),
+        //     'brand' => pq('.props>dl:eq(1)>dd')->html(),
+        //     'price' => pq('#ECS_SHOPPRICE')->html(),
+        //     'detail' => '<table>' . pq('div>table')->html() . '</table>',
+        //     'images' => $goods_images,
+        // );
         
-        print_r($goods_info); 
+        // print_r($goods_info); 
 
+
+        /**
+         * 加载图片
+         * 
+         */
+        $save_dir = APP.'tmp'.DS;
+        $url = 'http://su.bdimg.com/static/superplus/img/logo_white_ee663702.png';
+        $img = http_client_request( $url );
+
+        echo '<hr>Curl获取的二进制流文件MD5值:<br>'.md5($img); //图片md5
+
+        $fp2=@fopen($save_dir.'baidu-save.png','w');//一定要用w,否者md5会变
+        fwrite($fp2,$img);
+        fclose($fp2);
+        unset($img,$url);
+
+        echo "\n";
+        $fmd5 = '<hr>通过fwrite保存图片MD5:<br>'.md5_file($save_dir.'baidu-save.png');
+        echo $fmd5;
+
+        echo '<hr>原图md5:<br>'.md5_file($save_dir.'baidu-org.png');
+
+
+        // header("content-type:image/jpeg");
+        // echo $img;
 
     }
 

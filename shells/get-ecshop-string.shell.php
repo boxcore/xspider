@@ -69,7 +69,7 @@ if(!empty($url_list)){
                     'market_price' => (int)(floor($price/0.57)),
                     'shop_price'   => $price,
                     'goods_thumb'  => 'http://baobaopic.qiniudn.com/'.$v['thumb_img_org'],
-                );print_r($goods_info);exit;
+                );
 
                 $result = insert('ecs_goods', $goods_info);
 

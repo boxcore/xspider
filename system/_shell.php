@@ -4,10 +4,7 @@
   ----------------------------------------------------------------------
     shell脚本载入文件
 
-    @pack boxcore
-    @version 0.1 (presimmon)
-    @link http://framework.boxcore.org
-    @author chunze.huang
+    @author boxcore
   ----------------------------------------------------------------------
 */
 

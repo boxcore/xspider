@@ -42,7 +42,8 @@ if(!empty($url_list)){
             $goods_id = intval( pq('input[name="id"]')->attr('value') );
             
             // 说明源id大于47900是无水印的 http://www.tomdurrie.com/search.php?page=380 前判读吧..
-            if($goods_id>47900){
+            // 63767 后面开始进行第二次采集
+            if($goods_id>63767){
 
                 // 删除旧产品数据和相册数据
                 delete( 'ecs_goods', array('goods_id'=>$goods_id) );

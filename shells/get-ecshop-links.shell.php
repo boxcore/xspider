@@ -7,13 +7,13 @@ set_time_limit( 0 );
 define('APP',  dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR);
 
 // 载入框架引导文件
-require APP.'system/_shell.php';
+require APP . 'system/_shell.php';
 require APP . 'funcs/spider.fn.php';
 require APP . 'models/TaskModel.php';
 require APP . 'et/phpQuery/phpQuery.php';
 
 //获取链接列表  http://www.tomdurrie.com/search.php?page=380
-$links = get_batch_link('http://www.tomdurrie.com/search.php?page=(*)', 1, 19, 1);
+$links = get_batch_link('http://www.tomdurrie.com/search.php?page=(*)', 1, 6, 1);
 if(!empty($links)){
     foreach($links as $target_url){
         /**

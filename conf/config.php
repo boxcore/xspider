@@ -16,9 +16,9 @@ $_CONFIGS['system']['timezone']   = 'PRC';
  * 数据库配置
  */
 $_CONFIGS['db']['default']['hostname'] = 'localhost';
-$_CONFIGS['db']['default']['username'] = 'boxcore';
-$_CONFIGS['db']['default']['password'] = 'abc654321da';
-$_CONFIGS['db']['default']['database'] = 'boxcore_robotx';
+$_CONFIGS['db']['default']['username'] = 'root';
+$_CONFIGS['db']['default']['password'] = '123456';
+$_CONFIGS['db']['default']['database'] = 'xspider';
 $_CONFIGS['db']['default']['port']     = '3306';
 $_CONFIGS['db']['default']['char_set'] = 'utf8';
 
